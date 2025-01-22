@@ -55,28 +55,18 @@ function Clients() {
 
   let edit = (e, id) => {
     e.preventDefault();
-    Swal.fire({
-      title: "Do you want to edit this record?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes, edit it!",
-      cancelButtonText: "No, cancel",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .get(apiUrl + "clients/" + id)
-          .then((res) => {
-            if (res.data.status == "success") {
-              setData(res.data.data);
-            }
-          })
-          .catch((ex) => {
-            console.log(ex);
-          });
-      }
-    });
+    axios
+      .get(apiUrl + "clients/" + id)
+      .then((res) => {
+        if (res.data.status == "success") {
+          setData(res.data.data);
+        }
+      })
+      .catch((ex) => {
+        console.log(ex);
+      });
   };
-  
+
 
   let save = (e) => {
     e.preventDefault();
@@ -98,7 +88,7 @@ function Clients() {
       dataErrors.gstcode = "Please enter GST code";
       validated = false;
     }
-  
+
     setDataError({ ...dataErrors });
     if (validated) {
       if (data.id == 0) {
@@ -132,7 +122,7 @@ function Clients() {
       }
     }
   };
-  
+
   let deleteRecord = (e, id) => {
     e.preventDefault();
     Swal.fire({
@@ -160,7 +150,7 @@ function Clients() {
       }
     });
   };
-  
+
 
   useEffect(() => {
     load();

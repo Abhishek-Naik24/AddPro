@@ -55,26 +55,16 @@ const Newspapers = () => {
 
   let edit = (e, id) => {
     e.preventDefault();
-    Swal.fire({
-      title: "Do you want to edit this record?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes, edit it!",
-      cancelButtonText: "No, cancel",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .get(apiUrl + "newspapers/" + id)
-          .then((res) => {
-            if (res.data.status == "success") {
-              setData(res.data.data);
-            }
-          })
-          .catch((ex) => {
-            console.log(ex);
-          });
-      }
-    });
+    axios
+      .get(apiUrl + "newspapers/" + id)
+      .then((res) => {
+        if (res.data.status == "success") {
+          setData(res.data.data);
+        }
+      })
+      .catch((ex) => {
+        console.log(ex);
+      });
   };
 
 
@@ -176,7 +166,7 @@ const Newspapers = () => {
               <Link to={"/user"}>User</Link>
             </li>
             <li class="breadcrumb-item">Master</li>
-            <li class="breadcrumb-item active">New_Papers</li>
+            <li class="breadcrumb-item active">News_Papers</li>
           </ol>
         </nav>
       </div>
@@ -297,7 +287,7 @@ const Newspapers = () => {
                           <td>
                             <button
                               className="btn btn-sm btn-primary"
-                              onClick={(e) => 
+                              onClick={(e) =>
                                 edit(e, row.id)
                               }
                             >
@@ -305,7 +295,7 @@ const Newspapers = () => {
                             </button>
                             <button
                               className="btn btn-sm btn-danger ms-1"
-                              onClick={(e) => 
+                              onClick={(e) =>
                                 deleteRecord(e, row.id)
                               }
                             >

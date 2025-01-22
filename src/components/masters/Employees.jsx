@@ -55,31 +55,21 @@ function Employees() {
 
   let handleChange = (e) => {
     setData({ ...data, [e.target.id]: e.target.value });
-    setDataError({...dataError,[e.target.id]:''})
+    setDataError({ ...dataError, [e.target.id]: '' })
   };
 
   let edit = (e, id) => {
     e.preventDefault();
-    Swal.fire({
-      title: "Do you want to edit this record?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .get(apiUrl + "employees/" + id)
-          .then((res) => {
-            if (res.data.status === "success") {
-              setData(res.data.data);
-            }
-          })
-          .catch((ex) => {
-            console.log(ex);
-          });
-      }
-    });
+    axios
+      .get(apiUrl + "employees/" + id)
+      .then((res) => {
+        if (res.data.status === "success") {
+          setData(res.data.data);
+        }
+      })
+      .catch((ex) => {
+        console.log(ex);
+      });
   };
 
 
